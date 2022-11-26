@@ -4,9 +4,7 @@ import { Repository } from 'typeorm';
 import { CreateTodoDTO } from './dto/create-todo.dto';
 import { UpdateTodoDTO } from './dto/update-todo.dto';
 import { TodoEntity } from './entity/todo.entity';
-interface IIDinterface {
-  id: string;
-}
+
 @Injectable()
 export class TodoService {
   constructor(
@@ -15,7 +13,7 @@ export class TodoService {
   ) {}
 
   async findAll() {
-    return await this.todoRepository.find();
+    return await this.todoRepository.find({ order: { createdAt: 'DESC' } });
   }
 
   async findOneOrFail(id: any) {
